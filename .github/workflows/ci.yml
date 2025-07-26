@@ -14,9 +14,13 @@ jobs:
         with:
           node-version: 20
           cache: 'yarn'
-          cache-dependency-path: apps/web/yarn.lock
+          cache-dependency-path: yarn.lock
       - name: Install dependencies
-        run: yarn --immutable
+        run: |
+          corepack prepare yarn@1.22.19 --activate
+          yarn install --frozen-lockfile --ignore-scripts
+      - name: Install git-secrets
+        run: sudo apt-get update && sudo apt-get install -y git-secrets
       - name: Lint
         run: yarn lint
       - name: Type check
