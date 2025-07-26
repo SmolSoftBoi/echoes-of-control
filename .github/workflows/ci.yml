@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+          cache-dependency-path: apps/web/yarn.lock
+      - name: Install dependencies
+        run: yarn --immutable
+      - name: Lint
+        run: yarn lint
+      - name: Type check
+        run: yarn typecheck
+      - name: Unit tests
+        run: yarn test
+      - name: E2E tests
+        run: yarn e2e
+      - name: Build
+        run: yarn build
+      - name: Scan for secrets
+        run: git secrets --scan
