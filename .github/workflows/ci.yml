@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+      - name: Install dependencies
+        run: |
+          corepack prepare yarn@1.22.19 --activate
+          yarn install --frozen-lockfile --ignore-scripts
+      - name: Install git-secrets
+        run: sudo apt-get update && sudo apt-get install -y git-secrets
+      - name: Lint
+        run: yarn lint
+      - name: Type check
+        run: yarn typecheck
+      - name: Unit tests
+        run: yarn test
+      - name: E2E tests
+        run: yarn e2e
+      - name: Build
+        run: yarn build
+      - name: Scan for secrets
+        run: git secrets --scan

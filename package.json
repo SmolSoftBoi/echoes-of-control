@@ -3,5 +3,18 @@
   "version": "1.0.0",
   "repository": "https://github.com/SmolSoftBoi/echoes-of-control.git",
   "author": "Kristian Matthews-Kennington <kristian@matthews-kennington.com>",
-  "private": true
+  "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "web:dev": "yarn workspace web dev",
+    "build": "yarn workspace web build",
+    "lint": "yarn workspace web lint",
+    "lint:fix": "yarn workspace web lint --fix",
+    "typecheck": "yarn workspace web tsc --noEmit",
+    "test": "echo \"No tests yet\"",
+    "e2e": "echo \"No e2e tests yet\"",
+    "web:ci": "yarn lint && yarn typecheck && yarn test && yarn e2e"
+  }
 }

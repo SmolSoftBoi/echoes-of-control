@@ -1,0 +1,14 @@
+{
+  "name": "Echoes of Control",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
+  "postCreateCommand": "corepack prepare yarn@1.22.19 --activate && yarn install --frozen-lockfile --ignore-scripts",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "forwardPorts": [3000]
+}
