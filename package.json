@@ -5,15 +5,16 @@
   "author": "Kristian Matthews-Kennington <kristian@matthews-kennington.com>",
   "private": true,
   "workspaces": [
-    "apps/web"
+    "apps/web",
+    "packages/*"
   ],
   "scripts": {
     "web:dev": "yarn workspace web dev",
-    "build": "yarn workspace web build",
-    "lint": "yarn workspace web lint",
-    "lint:fix": "yarn workspace web lint --fix",
-    "typecheck": "yarn workspace web tsc --noEmit",
-    "test": "echo \"No tests yet\"",
+    "build": "yarn workspaces run build",
+    "lint": "yarn workspaces run lint",
+    "lint:fix": "yarn workspaces run lint --fix",
+    "typecheck": "yarn workspaces run tsc --noEmit",
+    "test": "yarn workspaces run test",
     "e2e": "echo \"No e2e tests yet\"",
     "web:ci": "yarn lint && yarn typecheck && yarn test && yarn e2e"
   }
