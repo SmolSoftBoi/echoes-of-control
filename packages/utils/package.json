@@ -1,0 +1,24 @@
+{
+  "name": "utils",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "eslint": "^9",
+    "typescript": "^5",
+    "vitest": "^3.2.4",
+    "jsdom": "^26.1.0"
+  },
+  "dependencies": {
+    "clsx": "^2",
+    "tailwind-merge": "^2"
+  }
+}
