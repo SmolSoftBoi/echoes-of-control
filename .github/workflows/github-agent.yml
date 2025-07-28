@@ -1,0 +1,22 @@
+name: GitHub Agent
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  agent:
+    if: startsWith(github.event.comment.body, '/agent')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Run Codex Agent
+        uses: openai/codex/.github/actions/codex@main
+        with:
+          openai_api_key: ${{ secrets.CODEX_OPENAI_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          trigger_phrase: '/agent'
+          codex_home: ./.github/codex/home
