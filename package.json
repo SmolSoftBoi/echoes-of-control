@@ -16,6 +16,7 @@
     "typecheck": "yarn workspaces run tsc --noEmit",
     "test": "yarn workspaces run test",
     "e2e": "echo \"No e2e tests yet\"",
-    "web:ci": "yarn lint && yarn typecheck && yarn test && yarn e2e"
+    "web:ci": "yarn lint && yarn typecheck && yarn test && yarn e2e",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\""
   }
 }
