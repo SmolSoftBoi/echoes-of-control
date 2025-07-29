@@ -12,6 +12,8 @@ export interface StateMachineConfig<S extends string, E extends string> {
   readonly initial: S;
   /** Map of state transitions. */
   readonly transitions: TransitionMap<S, E>;
+  /** Optional callback triggered on state changes. */
+  readonly onChange?: (next: S, prev: S) => void;
 }
 
 /**
@@ -56,9 +58,13 @@ export function createStateMachine<S extends string, E extends string>(
     },
     send(event) {
       const next = getTransition(current, event);
-      if (next) {
-        current = next;
+      if (!next) {
+        return current;
       }
+
+      const prev = current;
+      current = next;
+      config.onChange?.(next, prev);
       return current;
     },
     can(event) {

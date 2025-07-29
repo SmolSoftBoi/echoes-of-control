@@ -31,4 +31,18 @@ describe('createStateMachine', () => {
     machine.send('go');
     expect(machine.can('go')).toBe(false);
   });
+
+  it('invokes onChange when state updates', () => {
+    const changes: string[] = [];
+    const machine = createStateMachine({
+      initial: 'one',
+      transitions: { one: { next: 'two' }, two: {} },
+      onChange(next, prev) {
+        changes.push(`${prev}->${next}`);
+      },
+    });
+
+    machine.send('next');
+    expect(changes).toEqual(['one->two']);
+  });
 });
