@@ -1,0 +1,15 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { GameClient } from './GameClient';
+
+const meta: Meta<typeof GameClient> = {
+  title: 'Components/GameClient',
+  component: GameClient,
+  args: {
+    'aria-label': 'Game client demo',
+  },
+};
+
+export default meta;
+export type Story = StoryObj<typeof GameClient>;
+
+export const Default: Story = {};
