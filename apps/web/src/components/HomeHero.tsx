@@ -1,5 +1,7 @@
-import Link from 'next/link';
+'use client';
+
 import React from 'react';
+import { Button } from '@ui/components/Button';
 
 /**
  * Hero section displayed on the home page.
@@ -11,12 +13,11 @@ export function HomeHero() {
       <p className="text-lg text-gray-600 dark:text-gray-400">
         A replay-friendly, text-first investigation game.
       </p>
-      <Link
+      <Button
         href="/"
-        className="rounded-full bg-foreground px-5 py-2 font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
-      >
-        Start Exploring 🚀
-      </Link>
+        label="Start Exploring 🚀"
+        className="rounded-full px-5 py-2 font-medium"
+      />
     </section>
   );
 }

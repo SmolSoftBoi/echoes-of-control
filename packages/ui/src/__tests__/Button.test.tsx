@@ -10,4 +10,12 @@ describe('Button', () => {
     const button = getByRole('button', { name: /click me/i });
     expect(button).toBeInTheDocument();
   });
+
+  it('renders an anchor when href provided', () => {
+    const { getByRole } = render(
+      <Button label="Start" href="/foo" />,
+    );
+    const link = getByRole('link', { name: /start/i });
+    expect(link).toHaveAttribute('href', '/foo');
+  });
 });
