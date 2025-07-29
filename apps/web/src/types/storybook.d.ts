@@ -1,4 +1,11 @@
+/**
+ * Minimal Storybook types used for stubs.
+ */
 declare module '@storybook/react' {
-  export type Meta<T> = Record<string, unknown>;
-  export type StoryObj<T> = Record<string, unknown>;
+  export interface Meta<TArgs = unknown> extends Record<string, unknown> {
+    args?: TArgs;
+  }
+  export interface StoryObj<TArgs = unknown> extends Record<string, unknown> {
+    args?: TArgs;
+  }
 }

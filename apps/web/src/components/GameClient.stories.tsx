@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { GameClient } from './GameClient';
 
-const meta: Meta<typeof GameClient> = {
+const meta: Meta<React.ComponentProps<typeof GameClient>> = {
   title: 'Components/GameClient',
   component: GameClient,
   args: {

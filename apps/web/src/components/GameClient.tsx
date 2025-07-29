@@ -1,12 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button } from '@ui/components/Button';
 import { cn } from '@utils/cn';
 import { createStateMachine } from '@utils/state-machine';
 
 /**
  * Interactive client component controlling basic game flow.
+ *
+ * Uses a ref-based state machine to avoid React Strict Mode
+ * double-initialisation issues.
  */
 export type GameClientProps = React.HTMLAttributes<HTMLElement>;
 
@@ -14,7 +17,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
   type S = 'intro' | 'playing' | 'completed';
   type E = 'start' | 'finish' | 'reset';
 
-  const [machine] = useState(() =>
+  const machineRef = useRef(
     createStateMachine<S, E>({
       initial: 'intro',
       transitions: {
@@ -25,10 +28,10 @@ export function GameClient({ className, ...props }: GameClientProps) {
     }),
   );
 
-  const [state, setState] = useState<S>(machine.state);
+  const [state, setState] = useState<S>(machineRef.current.state);
 
   const handle = (event: E) => {
-    setState(machine.send(event));
+    setState(machineRef.current.send(event));
   };
 
   return (
