@@ -13,4 +13,14 @@ const compat = new FlatCompat({
 export default [
   ...baseConfig,
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  {
+    settings: {
+      next: {
+        rootDir: __dirname,
+      },
+    },
+    rules: {
+      'next/no-html-link-for-pages': 'off',
+    },
+  },
 ];
