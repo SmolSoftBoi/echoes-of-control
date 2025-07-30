@@ -16,4 +16,9 @@ describe('HomeHero', () => {
     const link = getByRole('link', { name: /start exploring/i });
     expect(link).toHaveAttribute('href', '/');
   });
+
+  it('applies typography styles', () => {
+    const { container } = render(<HomeHero />);
+    expect(container.querySelector('.prose')).toBeInTheDocument();
+  });
 });
