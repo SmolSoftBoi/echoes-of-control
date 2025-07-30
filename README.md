@@ -28,6 +28,16 @@ Other useful commands:
 - `yarn lint:fix` – run ESLint with automatic fixes
 - `yarn test` – execute unit tests with Vitest
 
+## Database security
+
+The Supabase schema uses **row-level security**. Each `game` record belongs to
+a specific user, and policies ensure only its owner can access it. Apply the
+policies locally with:
+
+```bash
+supabase db reset
+```
+
 ## Contributing
 
 Follow the **Conventional Commits** style for commit messages. Linting and tests must pass before opening a PR. Coverage should remain above 90 %.
