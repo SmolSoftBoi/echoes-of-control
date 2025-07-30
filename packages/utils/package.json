@@ -4,7 +4,9 @@
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
@@ -13,11 +15,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
+    "jsdom": "^26.1.0",
     "typescript": "^5",
-    "vitest": "^3.2.4",
-    "jsdom": "^26.1.0"
+    "vitest": "^3.2.4"
   },
   "dependencies": {
+    "@supabase/supabase-js": "2.39.3",
     "clsx": "^2",
     "tailwind-merge": "^2"
   }
