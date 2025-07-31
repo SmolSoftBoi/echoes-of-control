@@ -28,4 +28,19 @@ describe('GameClient', () => {
     // back to intro
     expect(getByText(/press start/i)).toBeInTheDocument();
   });
+
+  it('focuses new button when state changes', () => {
+    const { getByRole } = render(<GameClient />);
+
+    const start = getByRole('button', { name: /start/i });
+    expect(start).toHaveFocus();
+    fireEvent.click(start);
+
+    const finish = getByRole('button', { name: /finish/i });
+    expect(finish).toHaveFocus();
+    fireEvent.click(finish);
+
+    const reset = getByRole('button', { name: /reset/i });
+    expect(reset).toHaveFocus();
+  });
 });

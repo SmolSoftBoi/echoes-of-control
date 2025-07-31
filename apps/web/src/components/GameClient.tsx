@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@ui/components/Button';
 import { cn } from '@utils/cn';
 import { createStateMachine } from '@utils/state-machine';
@@ -29,6 +29,11 @@ export function GameClient({ className, ...props }: GameClientProps) {
   );
 
   const [state, setState] = useState<S>(machineRef.current.state);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    buttonRef.current?.focus();
+  }, [state]);
 
   const handle = (event: E) => {
     setState(machineRef.current.send(event));
@@ -45,13 +50,28 @@ export function GameClient({ className, ...props }: GameClientProps) {
       {state === 'completed' && <p>Game over 🎉</p>}
       <div>
         {state === 'intro' && (
-          <Button label="Start" onClick={() => handle('start')} />
+          <Button
+            ref={buttonRef}
+            autoFocus
+            label="Start"
+            onClick={() => handle('start')}
+          />
         )}
         {state === 'playing' && (
-          <Button label="Finish" onClick={() => handle('finish')} />
+          <Button
+            ref={buttonRef}
+            autoFocus
+            label="Finish"
+            onClick={() => handle('finish')}
+          />
         )}
         {state === 'completed' && (
-          <Button label="Reset" onClick={() => handle('reset')} />
+          <Button
+            ref={buttonRef}
+            autoFocus
+            label="Reset"
+            onClick={() => handle('reset')}
+          />
         )}
       </div>
     </section>
