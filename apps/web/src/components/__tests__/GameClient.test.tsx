@@ -12,36 +12,36 @@ describe('GameClient', () => {
     expect(region.firstChild).toHaveAttribute('aria-live', 'polite');
 
     // intro state
-    expect(getByText(/press start/i)).toBeInTheDocument();
-    const start = getByRole('button', { name: /start/i });
+    expect(getByText(/press 'start game' to begin/i)).toBeInTheDocument();
+    const start = getByRole('button', { name: /start game/i });
     fireEvent.click(start);
 
     // playing state
-    expect(getByText(/playing/i)).toBeInTheDocument();
-    const finish = getByRole('button', { name: /finish/i });
+    expect(getByText(/game in progress/i)).toBeInTheDocument();
+    const finish = getByRole('button', { name: /finish game/i });
     fireEvent.click(finish);
 
     // completed state
     expect(getByText(/game over/i)).toBeInTheDocument();
-    const reset = getByRole('button', { name: /reset/i });
+    const reset = getByRole('button', { name: /reset game/i });
     fireEvent.click(reset);
 
     // back to intro
-    expect(getByText(/press start/i)).toBeInTheDocument();
+    expect(getByText(/press 'start game' to begin/i)).toBeInTheDocument();
   });
 
   it('focuses new button when state changes', () => {
     const { getByRole } = render(<GameClient />);
 
-    const start = getByRole('button', { name: /start/i });
+    const start = getByRole('button', { name: /start game/i });
     expect(start).toHaveFocus();
     fireEvent.click(start);
 
-    const finish = getByRole('button', { name: /finish/i });
+    const finish = getByRole('button', { name: /finish game/i });
     expect(finish).toHaveFocus();
     fireEvent.click(finish);
 
-    const reset = getByRole('button', { name: /reset/i });
+    const reset = getByRole('button', { name: /reset game/i });
     expect(reset).toHaveFocus();
   });
 });
