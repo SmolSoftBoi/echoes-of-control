@@ -9,6 +9,7 @@ describe('GameClient', () => {
     const { getByRole, getByText } = render(<GameClient />);
     const region = getByRole('region');
     expect(region).toBeInTheDocument();
+    expect(region.firstChild).toHaveAttribute('aria-live', 'polite');
 
     // intro state
     expect(getByText(/press start/i)).toBeInTheDocument();
