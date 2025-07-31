@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Header } from "../components/Header";
-import React from "react";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import React from 'react';
+
+import { Header } from '../components/Header';
+import { SkipLink } from '../components/SkipLink';
+
+import './globals.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +36,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <React.StrictMode>
+          <SkipLink />
           <Header />
           {children}
         </React.StrictMode>
