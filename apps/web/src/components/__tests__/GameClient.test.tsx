@@ -7,6 +7,8 @@ import { GameClient } from '../GameClient';
 describe('GameClient', () => {
   it('progresses through the game states', () => {
     const { getByRole, getByText } = render(<GameClient />);
+    const region = getByRole('region');
+    expect(region).toBeInTheDocument();
 
     // intro state
     expect(getByText(/press start/i)).toBeInTheDocument();

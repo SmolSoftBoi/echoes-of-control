@@ -7,8 +7,9 @@ import { HomeHero } from '../HomeHero';
 describe('HomeHero', () => {
   it('shows the welcome heading', () => {
     const { getByRole } = render(<HomeHero />);
+    const region = getByRole('region', { name: /welcome section/i });
     const heading = getByRole('heading', { name: /welcome to echoes of control/i });
-    expect(heading).toBeInTheDocument();
+    expect(region).toContainElement(heading);
   });
 
   it('links to start exploring', () => {

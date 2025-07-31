@@ -36,6 +36,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
 
   return (
     <section
+      role="region"
       className={cn('flex flex-col items-center gap-4 py-8', className)}
       {...props}
     >
