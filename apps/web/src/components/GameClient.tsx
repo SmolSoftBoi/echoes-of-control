@@ -29,6 +29,11 @@ export function GameClient({ className, ...props }: GameClientProps) {
   );
 
   const [state, setState] = useState<S>(machineRef.current.state);
+  const messages: Record<S, string> = {
+    intro: 'Press start to play 🎮',
+    playing: 'Playing…',
+    completed: 'Game over 🎉',
+  };
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -45,9 +50,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
       className={cn('flex flex-col items-center gap-4 py-8', className)}
       {...props}
     >
-      {state === 'intro' && <p>Press start to play 🎮</p>}
-      {state === 'playing' && <p>Playing…</p>}
-      {state === 'completed' && <p>Game over 🎉</p>}
+      <p aria-live="polite" aria-atomic="true">{messages[state]}</p>
       <div>
         {state === 'intro' && (
           <Button
