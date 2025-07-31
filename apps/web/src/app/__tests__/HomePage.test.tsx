@@ -6,8 +6,10 @@ import HomePage from '../page';
 
 describe('HomePage', () => {
   it('renders the game client', () => {
-    const { getByLabelText } = render(<HomePage />);
+    const { getByLabelText, getByRole } = render(<HomePage />);
+    const main = getByRole('main');
     const client = getByLabelText(/demo game client/i);
     expect(client).toBeInTheDocument();
+    expect(main).toContainElement(client);
   });
 });

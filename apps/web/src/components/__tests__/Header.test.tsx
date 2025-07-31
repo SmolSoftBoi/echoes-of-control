@@ -7,7 +7,10 @@ import '@testing-library/jest-dom';
 describe('Header', () => {
   it('renders a link to the homepage', () => {
     const { getByRole } = render(<Header />);
+    const banner = getByRole('banner');
+    const navigation = getByRole('navigation');
     const link = getByRole('link', { name: /echoes of control/i });
     expect(link).toHaveAttribute('href', '/');
+    expect(banner).toContainElement(navigation);
   });
 });

@@ -8,7 +8,7 @@ import { HomeHero } from '../components/HomeHero';
  */
 export default function HomePage() {
   return (
-    <main id="story" className="mx-auto max-w-3xl p-4" tabIndex={-1}>
+    <main id="story" role="main" className="mx-auto max-w-3xl p-4" tabIndex={-1}>
       <HomeHero />
       <GameClient className="mt-4" aria-label="Demo game client" />
       <div className="mt-10 flex justify-center">
