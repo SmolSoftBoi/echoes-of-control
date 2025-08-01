@@ -8,4 +8,4 @@ Shared utility functions for the monorepo.
 - `state-machine` – lightweight finite state machine creator with optional
   change callback.
 - `createSupabaseClient` – typed Supabase client creation helper.
-- `createStoryRunner` – runtime wrapper for generator based stories.
+- `createStoryRunner` – iterable wrapper around generator-based stories.

@@ -11,10 +11,10 @@ describe('createStoryRunner', () => {
 
     const runner = createStoryRunner(story);
 
-    expect(runner.step()).toBe('intro');
-    expect(runner.step()).toBe('choose');
-    expect(runner.step('ok')).toBe('end:ok');
-    expect(runner.step()).toBeUndefined();
+    expect(runner.step().value).toBe('intro');
+    expect(runner.step().value).toBe('choose');
+    expect(runner.step('ok').value).toBe('end:ok');
+    expect(runner.step().done).toBe(true);
   });
 
   it('resets the story', () => {
@@ -25,6 +25,6 @@ describe('createStoryRunner', () => {
     const runner = createStoryRunner(story);
     runner.step();
     runner.reset();
-    expect(runner.step()).toBe(1);
+    expect(runner.step().value).toBe(1);
   });
 });

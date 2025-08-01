@@ -1,15 +1,17 @@
-export interface StoryRunner<TInput, TOutput> {
+export interface StoryRunner<TInput, TOutput>
+  extends Iterator<TOutput, void, TInput> {
   /** Current value from the story */
   readonly current: TOutput | undefined;
-  /**
-   * Advance the story with optional input.
-   *
-   * @param input - Input to feed into the story.
-   * @returns Next output value or `undefined` if finished.
-   */
-  step(input?: TInput): TOutput | undefined;
   /** Reset the story to the beginning. */
   reset(): void;
+  /**
+   * Step through the story.
+   *
+   * @param input - Input to feed into the story.
+   * @returns Result of the next iteration.
+   */
+  step(input?: TInput): IteratorResult<TOutput, void>;
+  [Symbol.iterator](): StoryRunner<TInput, TOutput>;
 }
 
 /**
@@ -35,10 +37,16 @@ export function createStoryRunner<TInput = unknown, TOutput = unknown>(
       const result = iterator.next(input);
       if (result.done) {
         current = undefined;
-        return undefined;
+        return { done: true, value: undefined };
       }
       current = result.value;
-      return current;
+      return { done: false, value: current };
+    },
+    next(input) {
+      return this.step(input);
+    },
+    [Symbol.iterator]() {
+      return this;
     },
     reset() {
       iterator = factory();
