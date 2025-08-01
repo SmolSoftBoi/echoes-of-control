@@ -15,7 +15,7 @@ export type ChoiceButtonProps = {
   selected?: boolean;
   /** Called after selection */
   onSelect?: () => void;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'onClick'>;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'>;
 
 export const ChoiceButton = React.forwardRef<HTMLButtonElement, ChoiceButtonProps>(
   function ChoiceButton(

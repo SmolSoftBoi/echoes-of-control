@@ -44,4 +44,16 @@ describe('GameClient', () => {
     const reset = getByRole('button', { name: /reset game/i });
     expect(reset).toHaveFocus();
   });
+
+  it('allows path selection', () => {
+    const { getByRole, getByLabelText } = render(<GameClient />);
+    fireEvent.click(getByRole('button', { name: /start game/i }));
+
+    const pathA = getByLabelText('Choose path A');
+    const pathB = getByLabelText('Choose path B');
+    expect(pathA).toHaveAttribute('aria-pressed', 'false');
+    fireEvent.click(pathA);
+    expect(pathA).toHaveAttribute('aria-pressed', 'true');
+    expect(pathB).toHaveAttribute('aria-pressed', 'false');
+  });
 });
