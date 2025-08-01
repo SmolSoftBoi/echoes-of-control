@@ -25,6 +25,8 @@ jobs:
         run: yarn lint
       - name: Type check
         run: yarn typecheck
+      - name: Compile
+        run: yarn build
       - name: Unit tests
         run: yarn test
       - name: E2E tests
