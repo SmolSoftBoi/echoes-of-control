@@ -7,8 +7,8 @@ import '@testing-library/jest-dom';
 describe('Header', () => {
   it('renders a link to the homepage', () => {
     const { getByRole } = render(<Header />);
-    const banner = getByRole('banner');
-    const navigation = getByRole('navigation');
+    const banner = getByRole('banner', { name: /site banner/i });
+    const navigation = getByRole('navigation', { name: /primary navigation/i });
     const link = getByRole('link', { name: /echoes of control/i });
     expect(link).toHaveAttribute('href', '/');
     expect(banner).toContainElement(navigation);
