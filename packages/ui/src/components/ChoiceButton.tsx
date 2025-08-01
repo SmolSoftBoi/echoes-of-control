@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { cn } from '@utils/cn';
+import { Button } from './Button';
 
 /**
  * Button for selecting a choice.
@@ -38,16 +39,14 @@ export const ChoiceButton = React.forwardRef<HTMLButtonElement, ChoiceButtonProp
     };
 
     return (
-      <button
+      <Button
         {...props}
         ref={ref}
-        type="button"
+        label={label}
         aria-pressed={selected}
         className={classes}
         onClick={handleClick}
-      >
-        {label}
-      </button>
+      />
     );
   },
 );
