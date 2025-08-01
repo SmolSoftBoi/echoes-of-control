@@ -1,7 +1,9 @@
-export interface StoryRunner<TInput, TOutput>
+export interface StoryRunner<TInput, TOutput, TVars extends Record<string, unknown> = Record<string, unknown>>
   extends Iterator<TOutput, void, TInput> {
   /** Current value from the story */
   readonly current: TOutput | undefined;
+  /** Collected variable values */
+  readonly variables: Partial<TVars>;
   /** Reset the story to the beginning. */
   reset(): void;
   /**
@@ -9,9 +11,9 @@ export interface StoryRunner<TInput, TOutput>
    *
    * @param input - Input to feed into the story.
    * @returns Result of the next iteration.
-   */
+  */
   step(input?: TInput): IteratorResult<TOutput, void>;
-  [Symbol.iterator](): StoryRunner<TInput, TOutput>;
+  [Symbol.iterator](): StoryRunner<TInput, TOutput, TVars>;
 }
 
 /**
@@ -23,15 +25,27 @@ export interface StoryRunner<TInput, TOutput>
  * @param factory - Function returning a story generator.
  * @returns A runtime wrapper around the story.
  */
-export function createStoryRunner<TInput = unknown, TOutput = unknown>(
-  factory: () => Generator<TOutput, void, TInput>,
-): StoryRunner<TInput, TOutput> {
+export type StoryYield<TOutput, TVars extends Record<string, unknown>> =
+  | TOutput
+  | { value: TOutput; vars?: Partial<TVars> };
+
+export function createStoryRunner<
+  TInput = unknown,
+  TOutput = unknown,
+  TVars extends Record<string, unknown> = Record<string, unknown>,
+>(
+  factory: () => Generator<StoryYield<TOutput, TVars>, void, TInput>,
+): StoryRunner<TInput, TOutput, TVars> {
   let iterator = factory();
   let current: TOutput | undefined;
+  let variables: Partial<TVars> = {};
 
   return {
     get current() {
       return current;
+    },
+    get variables() {
+      return variables;
     },
     step(input?: TInput): IteratorResult<TOutput, void> {
       const result =
@@ -41,19 +55,31 @@ export function createStoryRunner<TInput = unknown, TOutput = unknown>(
         current = undefined;
         return { done: true, value: undefined };
       }
-
-      current = result.value;
+      const output = result.value;
+      if (typeof output === 'object' && output !== null && 'value' in output) {
+        const { value, vars } = output as {
+          value: TOutput;
+          vars?: Partial<TVars>;
+        };
+        current = value;
+        if (vars) {
+          variables = { ...variables, ...vars };
+        }
+      } else {
+        current = output as TOutput;
+      }
       return { done: false, value: current };
     },
     next(input?: TInput): IteratorResult<TOutput, void> {
       return this.step(input);
     },
-    [Symbol.iterator](): StoryRunner<TInput, TOutput> {
+    [Symbol.iterator](): StoryRunner<TInput, TOutput, TVars> {
       return this;
     },
     reset() {
       iterator = factory();
       current = undefined;
+      variables = {};
     },
   };
 }
