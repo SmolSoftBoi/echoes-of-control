@@ -30,8 +30,8 @@ export function GameClient({ className, ...props }: GameClientProps) {
 
   const [state, setState] = useState<S>(machineRef.current.state);
   const messages: Record<S, string> = {
-    intro: 'Press start to play 🎮',
-    playing: 'Playing…',
+    intro: "Press 'Start game' to begin 🎮",
+    playing: 'Game in progress…',
     completed: 'Game over 🎉',
   };
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -56,7 +56,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
           <Button
             ref={buttonRef}
             autoFocus
-            label="Start"
+            label="Start game"
             onClick={() => handle('start')}
           />
         )}
@@ -64,7 +64,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
           <Button
             ref={buttonRef}
             autoFocus
-            label="Finish"
+            label="Finish game"
             onClick={() => handle('finish')}
           />
         )}
@@ -72,7 +72,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
           <Button
             ref={buttonRef}
             autoFocus
-            label="Reset"
+            label="Reset game"
             onClick={() => handle('reset')}
           />
         )}
