@@ -10,7 +10,10 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "@utils/*": ["../utils/src/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
