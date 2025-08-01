@@ -33,19 +33,22 @@ export function createStoryRunner<TInput = unknown, TOutput = unknown>(
     get current() {
       return current;
     },
-    step(input) {
-      const result = iterator.next(input);
+    step(input?: TInput): IteratorResult<TOutput, void> {
+      const result =
+        input === undefined ? iterator.next() : iterator.next(input);
+
       if (result.done) {
         current = undefined;
         return { done: true, value: undefined };
       }
+
       current = result.value;
       return { done: false, value: current };
     },
-    next(input) {
+    next(input?: TInput): IteratorResult<TOutput, void> {
       return this.step(input);
     },
-    [Symbol.iterator]() {
+    [Symbol.iterator](): StoryRunner<TInput, TOutput> {
       return this;
     },
     reset() {
