@@ -1,53 +1,31 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from '@ui/components/Button';
 import { ChoiceButton } from '@ui/components/ChoiceButton';
 import { cn } from '@utils/cn';
-import { createStateMachine } from '@utils/state-machine';
+import { useGameMachine } from '@/lib/useGameMachine';
 
 /**
  * Interactive client component controlling basic game flow.
  *
- * Uses a ref-based state machine to avoid React Strict Mode
- * double-initialisation issues.
+ * Relies on {@link useGameMachine} to handle game state.
  */
+/** Props for the GameClient component. */
 export type GameClientProps = React.HTMLAttributes<HTMLElement>;
 
 export function GameClient({ className, ...props }: GameClientProps) {
-  type S = 'intro' | 'playing' | 'completed';
-  type E = 'start' | 'finish' | 'reset';
-
-  const machineRef = useRef(
-    createStateMachine<S, E>({
-      initial: 'intro',
-      transitions: {
-        intro: { start: 'playing' },
-        playing: { finish: 'completed' },
-        completed: { reset: 'intro' },
-      },
-    }),
-  );
-
-  const [state, setState] = useState<S>(machineRef.current.state);
-  const [path, setPath] = useState<'a' | 'b' | null>(null);
-  const messages: Record<S, string> = {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const { state, path, start, finish, reset, choosePath } = useGameMachine();
+  const messages: Record<typeof state, string> = {
     intro: "Press 'Start game' to begin 🎮",
     playing: 'Game in progress…',
     completed: 'Game over 🎉',
   };
-  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     buttonRef.current?.focus();
   }, [state]);
-
-  const handle = (event: E) => {
-    setState(machineRef.current.send(event));
-    if (event === 'reset' || event === 'start') {
-      setPath(null);
-    }
-  };
 
   return (
     <section
@@ -66,7 +44,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
             ref={buttonRef}
             autoFocus
             label="Start game"
-            onClick={() => handle('start')}
+            onClick={start}
           />
         )}
         {state === 'playing' && (
@@ -75,13 +53,13 @@ export function GameClient({ className, ...props }: GameClientProps) {
               <ChoiceButton
                 label="Path A"
                 selected={path === 'a'}
-                onSelect={() => setPath('a')}
+                onSelect={() => choosePath('a')}
                 aria-label="Choose path A"
               />
               <ChoiceButton
                 label="Path B"
                 selected={path === 'b'}
-                onSelect={() => setPath('b')}
+                onSelect={() => choosePath('b')}
                 aria-label="Choose path B"
               />
             </div>
@@ -89,7 +67,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
               ref={buttonRef}
               autoFocus
               label="Finish game"
-              onClick={() => handle('finish')}
+              onClick={finish}
             />
           </div>
         )}
@@ -98,7 +76,7 @@ export function GameClient({ className, ...props }: GameClientProps) {
             ref={buttonRef}
             autoFocus
             label="Reset game"
-            onClick={() => handle('reset')}
+            onClick={reset}
           />
         )}
       </div>
