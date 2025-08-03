@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@ui/components/Button';
 import { ChoiceButton } from '@ui/components/ChoiceButton';
+import { useGame } from '@ui/hooks/useGameContext';
 import { cn } from '@utils/cn';
 import { useGameMachine } from '@/lib/useGameMachine';
 
@@ -16,7 +17,15 @@ export type GameClientProps = React.HTMLAttributes<HTMLElement>;
 
 export function GameClient({ className, ...props }: GameClientProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const { state, path, start, finish, reset, choosePath } = useGameMachine();
+  const {
+    state,
+    path,
+    start,
+    finish,
+    reset: machineReset,
+    choosePath: machineChoosePath,
+  } = useGameMachine();
+  const { setStatus, addClue, reset } = useGame();
   const messages: Record<typeof state, string> = {
     intro: "Press 'Start game' to begin 🎮",
     playing: 'Game in progress…',
@@ -26,6 +35,28 @@ export function GameClient({ className, ...props }: GameClientProps) {
   useEffect(() => {
     buttonRef.current?.focus();
   }, [state]);
+
+  useEffect(() => {
+    if (state === 'intro') {
+      reset();
+      return;
+    }
+    if (state === 'playing') {
+      setStatus('Game in progress…');
+      return;
+    }
+    setStatus('Game over 🎉');
+  }, [state, reset, setStatus]);
+
+  const resetGame = () => {
+    machineReset();
+    reset();
+  };
+
+  const choosePath = (p: 'a' | 'b') => {
+    addClue(`Path ${p.toUpperCase()} selected`);
+    machineChoosePath(p);
+  };
 
   return (
     <section
@@ -66,17 +97,17 @@ export function GameClient({ className, ...props }: GameClientProps) {
             <Button
               ref={buttonRef}
               autoFocus
-              label="Finish game"
-              onClick={finish}
-            />
-          </div>
-        )}
+            label="Finish game"
+            onClick={finish}
+          />
+        </div>
+      )}
         {state === 'completed' && (
           <Button
             ref={buttonRef}
             autoFocus
             label="Reset game"
-            onClick={reset}
+            onClick={resetGame}
           />
         )}
       </div>
