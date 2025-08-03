@@ -1,24 +1,16 @@
-'use client'
+'use client';
 
 import React from 'react';
 import { cn } from '@utils/cn';
+import { useGame } from '../hooks/useGameContext';
 
 /**
- * Sidebar panel showing the player's status and any discovered clues.
+ * Sidebar panel showing the player's current status and discovered clues.
  */
-export interface StatusSidebarProps extends React.HTMLAttributes<HTMLElement> {
-  /** Current game status string. */
-  status: string;
-  /** List of clue texts to display. */
-  clues: string[];
-}
+export type StatusSidebarProps = React.HTMLAttributes<HTMLElement>;
 
-export function StatusSidebar({
-  status,
-  clues,
-  className,
-  ...props
-}: StatusSidebarProps) {
+export function StatusSidebar({ className, ...props }: StatusSidebarProps) {
+  const { status, clues } = useGame();
   return (
     <aside
       {...props}
