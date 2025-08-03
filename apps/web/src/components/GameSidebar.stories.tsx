@@ -13,9 +13,9 @@ const meta: Meta<React.ComponentProps<typeof GameSidebar>> = {
       </GameProvider>
     ),
   ],
-  args: {
-    'aria-label': 'Game status sidebar',
-  },
+    args: {
+      'aria-label': 'Game status sidebar',
+    },
 };
 
 export default meta;

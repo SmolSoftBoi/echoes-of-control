@@ -1,16 +1,14 @@
 'use client';
 
 import React from 'react';
-import { StatusSidebar, type StatusSidebarProps } from '@ui/components/StatusSidebar';
-import { useGame } from '@ui/hooks/useGameContext';
+import { StatusSidebar } from '@ui/components/StatusSidebar';
 
 /** Props for {@link GameSidebar}. */
-export type GameSidebarProps = Omit<StatusSidebarProps, 'status' | 'clues'>;
+export type GameSidebarProps = React.ComponentProps<typeof StatusSidebar>;
 
 /**
- * Sidebar that reads game state from {@link GameProvider}.
+ * Sidebar that proxies {@link StatusSidebar}.
  */
 export function GameSidebar(props: GameSidebarProps) {
-  const { status, clues } = useGame();
-  return <StatusSidebar status={status} clues={clues} {...props} />;
+  return <StatusSidebar {...props} />;
 }
