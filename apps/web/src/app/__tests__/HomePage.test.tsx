@@ -5,11 +5,15 @@ import { describe, expect, it } from 'vitest';
 import HomePage from '../page';
 
 describe('HomePage', () => {
-  it('renders the game client', () => {
-    const { getByLabelText, getByRole } = render(<HomePage />);
+  it('renders game client with sidebar', () => {
+    const { getByLabelText, getByRole, getByText } = render(<HomePage />);
     const main = getByRole('main');
     const client = getByLabelText(/demo game client/i);
+    const sidebar = getByLabelText(/game status sidebar/i);
     expect(client).toBeInTheDocument();
     expect(main).toContainElement(client);
+    expect(sidebar).toBeInTheDocument();
+    expect(getByText(/idle/i)).toBeInTheDocument();
+    expect(getByText(/no clues yet/i)).toBeInTheDocument();
   });
 });
