@@ -29,4 +29,16 @@ describe('rate limit action', () => {
     expect(allowedAgain).toBe(true);
     vi.useRealTimers();
   });
+
+  it('clamps window to one hour', async () => {
+    vi.useFakeTimers();
+    const HOUR = 3_600_000;
+    const key = 'clamp';
+    const options = { windowMs: HOUR * 2, limit: 1 } as const;
+    expect(await rateLimit(key, options)).toBe(true);
+    expect(await rateLimit(key, options)).toBe(false);
+    vi.advanceTimersByTime(HOUR);
+    expect(await rateLimit(key, options)).toBe(true);
+    vi.useRealTimers();
+  });
 });
