@@ -16,4 +16,17 @@ describe('rate limit action', () => {
     const blocked = await rateLimit(key);
     expect(blocked).toBe(false);
   });
+
+  it('resets after the window', async () => {
+    vi.useFakeTimers();
+    const key = 'reset';
+    const allowed = await rateLimit(key, { windowMs: 100, limit: 1 });
+    expect(allowed).toBe(true);
+    const blocked = await rateLimit(key, { windowMs: 100, limit: 1 });
+    expect(blocked).toBe(false);
+    vi.advanceTimersByTime(100);
+    const allowedAgain = await rateLimit(key, { windowMs: 100, limit: 1 });
+    expect(allowedAgain).toBe(true);
+    vi.useRealTimers();
+  });
 });
