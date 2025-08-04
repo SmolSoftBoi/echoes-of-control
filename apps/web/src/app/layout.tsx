@@ -2,7 +2,10 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import React from 'react';
 
+import { GameProvider } from '@ui/hooks/useGameContext';
+
 import { Header } from '../components/Header';
+import { NeedHintButton } from '../components/NeedHintButton';
 import { SkipLink } from '../components/SkipLink';
 
 import './globals.css';
@@ -36,9 +39,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <React.StrictMode>
-          <SkipLink />
-          <Header />
-          {children}
+          <GameProvider>
+            <SkipLink />
+            <Header />
+            {children}
+            <NeedHintButton className="fixed bottom-4 right-4" />
+          </GameProvider>
         </React.StrictMode>
       </body>
     </html>
