@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@ui/components/Button';
-import { useGame } from '@ui/hooks/useGameContext';
-import { generateHint } from '../app/_actions/hint';
+import { useHint } from '../hooks/useHint';
 
 /** Props for {@link NeedHintButton}. */
 export interface NeedHintButtonProps {
@@ -15,26 +14,14 @@ export interface NeedHintButtonProps {
  * Button that fetches a hint for the current puzzle and stores it as a clue.
  */
 export function NeedHintButton({ className }: NeedHintButtonProps) {
-  const { status, addClue } = useGame();
-  const [pending, setPending] = useState(false);
-
-  const onClick = async () => {
-    if (pending) return;
-    setPending(true);
-    try {
-      const hint = await generateHint(status);
-      addClue(hint);
-    } finally {
-      setPending(false);
-    }
-  };
+  const { fetchHint, pending } = useHint();
 
   return (
     <Button
       label={pending ? 'Fetching hint…' : 'Need a hint? 💡'}
       className={className}
       disabled={pending}
-      onClick={onClick}
+      onClick={fetchHint}
     />
   );
 }
