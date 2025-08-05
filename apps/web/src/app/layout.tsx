@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import React from 'react';
 
 import { GameProvider } from '@ui/hooks/useGameContext';
@@ -7,18 +6,9 @@ import { GameProvider } from '@ui/hooks/useGameContext';
 import { Header } from '../components/Header';
 import { NeedHintButton } from '../components/NeedHintButton';
 import { SkipLink } from '../components/SkipLink';
+import { brandFont, geistMono } from './fonts';
 
 import './globals.css';
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Echoes of Control",
@@ -36,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${brandFont.variable} ${geistMono.variable} antialiased`}
       >
         <React.StrictMode>
           <GameProvider>
