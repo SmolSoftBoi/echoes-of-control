@@ -4,3 +4,4 @@ export * from './components/StatusSidebar';
 export * from './components/HintWidget';
 export * from './hooks/useStoryClient';
 export * from './hooks/useGameContext';
+export * from './hooks/useStorylet';
