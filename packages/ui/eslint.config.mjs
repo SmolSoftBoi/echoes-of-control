@@ -14,11 +14,6 @@ export default [
   ...baseConfig,
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
-    settings: {
-      next: {
-        rootDir: '../../apps/web',
-      },
-    },
     rules: {
       'next/no-html-link-for-pages': 'off',
     },
