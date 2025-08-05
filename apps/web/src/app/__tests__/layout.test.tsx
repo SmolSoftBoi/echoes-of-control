@@ -8,11 +8,9 @@ vi.mock('next/font/google', () => ({
   Geist_Mono: () => ({ variable: 'mock-mono-font' }),
 }));
 
-vi.mock('../globals.css', () => ({}));
-
 describe('brandFont', () => {
   it('provides a class for the brand font', async () => {
-    const { brandFont } = await import('../layout');
+    const { brandFont } = await import('../fonts');
     const TestComponent = () => (
       <span className={brandFont.variable}>Text</span>
     );
