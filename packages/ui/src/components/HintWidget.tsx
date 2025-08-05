@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { cn } from '@utils/cn';
+import { useGame } from '../hooks/useGameContext';
 import { Button } from './Button';
 
 export type HintWidgetProps = {
@@ -13,6 +14,8 @@ export type HintWidgetProps = {
 
 /**
  * Widget displaying sequential gameplay hints.
+ *
+ * Revealed hints are added to the game provider clues.
  */
 export function HintWidget({
   hints,
@@ -20,13 +23,16 @@ export function HintWidget({
   className,
   ...props
 }: HintWidgetProps) {
+  const { addClue } = useGame();
   const [index, setIndex] = React.useState<number | null>(null);
 
   const handleReveal = () => {
     const next = index === null ? 0 : index + 1;
     if (next >= hints.length) return;
     setIndex(next);
-    onReveal?.(hints[next], next);
+    const hint = hints[next];
+    addClue(hint);
+    onReveal?.(hint, next);
   };
 
   const showButton = index === null || index < hints.length - 1;
