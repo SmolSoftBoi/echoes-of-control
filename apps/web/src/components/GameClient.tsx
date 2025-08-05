@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@ui/components/Button';
 import { ChoiceButton } from '@ui/components/ChoiceButton';
+import { FadeInParagraph } from '@ui/components/FadeInParagraph';
 import { useGame } from '@ui/hooks/useGameContext';
 import { cn } from '@utils/cn';
 import { useGameMachine } from '@/lib/useGameMachine';
@@ -64,11 +65,11 @@ export function GameClient({ className, ...props }: GameClientProps) {
       className={cn('flex flex-col items-center gap-4 py-8', className)}
       {...props}
     >
-      <p aria-live="polite" aria-atomic="true">
+      <FadeInParagraph aria-live="polite" aria-atomic="true">
         {state === 'playing' && path
           ? `Path ${path.toUpperCase()} selected`
           : messages[state]}
-      </p>
+      </FadeInParagraph>
       <div>
         {state === 'intro' && (
           <Button
