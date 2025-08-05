@@ -2,6 +2,7 @@ export * from './components/Button';
 export * from './components/ChoiceButton';
 export * from './components/StatusSidebar';
 export * from './components/HintWidget';
+export * from './components/StoryletCard';
 export * from './hooks/useStoryClient';
 export * from './hooks/useGameContext';
 export * from './hooks/useStorylet';
