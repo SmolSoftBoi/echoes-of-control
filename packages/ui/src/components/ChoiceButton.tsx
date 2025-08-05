@@ -1,13 +1,17 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { cn } from '@utils/cn';
 import { Button } from './Button';
+
+const MotionButton = motion.create(Button);
 
 /**
  * Button for selecting a choice.
  *
  * Adds `aria-pressed` to show selected state.
+ * Animates scale on hover and press.
  */
 export type ChoiceButtonProps = {
   /** Button label */
@@ -39,13 +43,15 @@ export const ChoiceButton = React.forwardRef<HTMLButtonElement, ChoiceButtonProp
     };
 
     return (
-      <Button
+      <MotionButton
         {...props}
         ref={ref}
         label={label}
         aria-pressed={selected}
         className={classes}
         onClick={handleClick}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       />
     );
   },
