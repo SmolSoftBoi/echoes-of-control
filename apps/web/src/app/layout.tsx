@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono, Poppins } from 'next/font/google';
 import React from 'react';
 
 import { GameProvider } from '@ui/hooks/useGameContext';
@@ -10,9 +10,11 @@ import { SkipLink } from '../components/SkipLink';
 
 import './globals.css';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+/** Font used for brand styling. */
+export const brandFont = Poppins({
+  variable: '--font-brand',
+  weight: ['400', '700'],
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
@@ -36,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${brandFont.variable} ${geistMono.variable} antialiased`}
       >
         <React.StrictMode>
           <GameProvider>
