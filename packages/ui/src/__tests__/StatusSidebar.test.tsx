@@ -31,7 +31,32 @@ describe('StatusSidebar', () => {
     expect(getByRole('progressbar')).toBeInTheDocument();
   });
 
+  it('does not play sound on initial render', () => {
+    vi.useFakeTimers();
+    function Setup() {
+      const { setStatus, addClue } = useGame();
+      React.useEffect(() => {
+        setStatus('Investigating');
+        addClue('Found note');
+      }, [setStatus, addClue]);
+      return <StatusSidebar />;
+    }
+
+    const spy = vi
+      .spyOn(sound, 'playStatusSound')
+      .mockImplementation(() => {});
+    render(
+      <GameProvider>
+        <Setup />
+      </GameProvider>,
+    );
+    expect(spy).not.toHaveBeenCalled();
+    vi.runAllTimers();
+    vi.useRealTimers();
+  });
+
   it('plays sound on status or clue change', () => {
+    vi.useFakeTimers();
     let api: GameContextValue;
     function Setup() {
       api = useGame();
@@ -46,6 +71,8 @@ describe('StatusSidebar', () => {
       </GameProvider>,
     );
 
+    vi.runAllTimers();
+
     act(() => {
       api.setStatus('Investigating');
     });
@@ -55,5 +82,6 @@ describe('StatusSidebar', () => {
       api.addClue('Found note');
     });
     expect(spy).toHaveBeenCalledTimes(2);
+    vi.useRealTimers();
   });
 });

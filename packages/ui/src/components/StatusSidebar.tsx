@@ -19,16 +19,23 @@ export interface StatusSidebarProps extends React.HTMLAttributes<HTMLElement> {
 export function StatusSidebar({ className, totalClues = 3, ...props }: StatusSidebarProps) {
   const { status, clues } = useGame();
   const prev = React.useRef({ status, clueCount: clues.length });
+  const ready = React.useRef(false);
 
   React.useEffect(() => {
-    if (
-      prev.current.status !== status ||
-      prev.current.clueCount !== clues.length
-    ) {
-      playStatusSound();
-      prev.current = { status, clueCount: clues.length };
-    }
+    const changed =
+      prev.current.status !== status || prev.current.clueCount !== clues.length;
+    if (!changed) return;
+
+    if (ready.current) playStatusSound();
+    prev.current = { status, clueCount: clues.length };
   }, [status, clues.length]);
+
+  React.useEffect(() => {
+    const id = setTimeout(() => {
+      ready.current = true;
+    });
+    return () => clearTimeout(id);
+  }, []);
 
   return (
     <aside
