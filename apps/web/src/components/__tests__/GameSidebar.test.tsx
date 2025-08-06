@@ -7,12 +7,13 @@ import { GameSidebar } from '../GameSidebar';
 
 describe('GameSidebar', () => {
   it('shows default status and no clues', () => {
-    const { getByText } = render(
+    const { getByText, getByRole } = render(
       <GameProvider>
         <GameSidebar />
       </GameProvider>,
     );
     expect(getByText(/idle/i)).toBeInTheDocument();
     expect(getByText(/no clues yet/i)).toBeInTheDocument();
+    expect(getByRole('progressbar')).toBeInTheDocument();
   });
 });

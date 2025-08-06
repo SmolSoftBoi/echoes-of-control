@@ -16,12 +16,13 @@ describe('StatusSidebar', () => {
         return <StatusSidebar />;
       }
 
-      const { getByText } = render(
-        <GameProvider>
-          <Setup />
-        </GameProvider>,
-      );
-      expect(getByText('Investigating')).toBeInTheDocument();
-      expect(getByText('Found note')).toBeInTheDocument();
-    });
+    const { getByText, getByRole } = render(
+      <GameProvider>
+        <Setup />
+      </GameProvider>,
+    );
+    expect(getByText('Investigating')).toBeInTheDocument();
+    expect(getByText('Found note')).toBeInTheDocument();
+    expect(getByRole('progressbar')).toBeInTheDocument();
   });
+});
