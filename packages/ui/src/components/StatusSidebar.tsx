@@ -3,13 +3,17 @@
 import React from 'react';
 import { cn } from '@utils/cn';
 import { useGame } from '../hooks/useGameContext';
+import { ProgressBar } from './ProgressBar';
 
 /**
  * Sidebar panel showing the player's current status and discovered clues.
  */
-export type StatusSidebarProps = React.HTMLAttributes<HTMLElement>;
+export interface StatusSidebarProps extends React.HTMLAttributes<HTMLElement> {
+  /** Total clues available. */
+  totalClues?: number;
+}
 
-export function StatusSidebar({ className, ...props }: StatusSidebarProps) {
+export function StatusSidebar({ className, totalClues = 3, ...props }: StatusSidebarProps) {
   const { status, clues } = useGame();
   return (
     <aside
@@ -21,9 +25,13 @@ export function StatusSidebar({ className, ...props }: StatusSidebarProps) {
     >
       <div>
         <h2 className="text-lg font-semibold">Status</h2>
-        <p aria-live="polite" aria-atomic="true">
-          {status}
-        </p>
+        <p aria-live="polite" aria-atomic="true">{status}</p>
+        <ProgressBar
+          value={clues.length}
+          max={totalClues}
+          aria-label="Clue progress"
+          className="mt-2"
+        />
       </div>
       <div>
         <h2 className="text-lg font-semibold">Clues</h2>

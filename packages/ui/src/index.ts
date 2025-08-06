@@ -6,3 +6,4 @@ export * from './components/StoryletCard';
 export * from './hooks/useStoryClient';
 export * from './hooks/useGameContext';
 export * from './hooks/useStorylet';
+export * from './components/ProgressBar';
