@@ -1,20 +1,25 @@
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import React, { useEffect } from 'react';
-import { describe, expect, it } from 'vitest';
-import { GameProvider, useGame } from '../hooks/useGameContext';
+import React from 'react';
+import { describe, expect, it, vi } from 'vitest';
+import {
+  GameProvider,
+  useGame,
+  type GameContextValue,
+} from '../hooks/useGameContext';
 import { StatusSidebar } from '../components/StatusSidebar';
+import * as sound from '../lib/sound';
 
 describe('StatusSidebar', () => {
   it('renders status and clues list', () => {
     function Setup() {
-        const { setStatus, addClue } = useGame();
-        useEffect(() => {
-          setStatus('Investigating');
-          addClue('Found note');
-        }, [setStatus, addClue]);
-        return <StatusSidebar />;
-      }
+      const { setStatus, addClue } = useGame();
+      React.useEffect(() => {
+        setStatus('Investigating');
+        addClue('Found note');
+      }, [setStatus, addClue]);
+      return <StatusSidebar />;
+    }
 
     const { getByText, getByRole } = render(
       <GameProvider>
@@ -24,5 +29,31 @@ describe('StatusSidebar', () => {
     expect(getByText('Investigating')).toBeInTheDocument();
     expect(getByText('Found note')).toBeInTheDocument();
     expect(getByRole('progressbar')).toBeInTheDocument();
+  });
+
+  it('plays sound on status or clue change', () => {
+    let api: GameContextValue;
+    function Setup() {
+      api = useGame();
+      return <StatusSidebar />;
+    }
+    const spy = vi
+      .spyOn(sound, 'playStatusSound')
+      .mockImplementation(() => {});
+    render(
+      <GameProvider>
+        <Setup />
+      </GameProvider>,
+    );
+
+    act(() => {
+      api.setStatus('Investigating');
+    });
+    expect(spy).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      api.addClue('Found note');
+    });
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 });
