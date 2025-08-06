@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '@utils/cn';
-import { Button } from './Button';
 
-const MotionButton = motion.create(Button);
+const MotionButton = motion.button;
 
 /**
  * Button for selecting a choice.
@@ -20,7 +19,7 @@ export type ChoiceButtonProps = {
   selected?: boolean;
   /** Called after selection */
   onSelect?: () => void;
-} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'>;
+} & Omit<HTMLMotionProps<'button'>, 'children'>;
 
 export const ChoiceButton = React.forwardRef<HTMLButtonElement, ChoiceButtonProps>(
   function ChoiceButton(
@@ -46,13 +45,15 @@ export const ChoiceButton = React.forwardRef<HTMLButtonElement, ChoiceButtonProp
       <MotionButton
         {...props}
         ref={ref}
-        label={label}
+        type="button"
         aria-pressed={selected}
         className={classes}
         onClick={handleClick}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-      />
+      >
+        {label}
+      </MotionButton>
     );
   },
 );
