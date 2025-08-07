@@ -3,10 +3,13 @@
 import React from 'react';
 import { cn } from '@utils/cn';
 import { useGame } from '../hooks/useGameContext';
+import { playStatusSound } from '../lib/sound';
 import { ProgressBar } from './ProgressBar';
 
 /**
  * Sidebar panel showing the player's current status and discovered clues.
+ *
+ * Plays a gentle beep when the status or clue count changes.
  */
 export interface StatusSidebarProps extends React.HTMLAttributes<HTMLElement> {
   /** Total clues available. */
@@ -15,6 +18,25 @@ export interface StatusSidebarProps extends React.HTMLAttributes<HTMLElement> {
 
 export function StatusSidebar({ className, totalClues = 3, ...props }: StatusSidebarProps) {
   const { status, clues } = useGame();
+  const prev = React.useRef({ status, clueCount: clues.length });
+  const ready = React.useRef(false);
+
+  React.useEffect(() => {
+    const changed =
+      prev.current.status !== status || prev.current.clueCount !== clues.length;
+    if (!changed) return;
+
+    if (ready.current) playStatusSound();
+    prev.current = { status, clueCount: clues.length };
+  }, [status, clues.length]);
+
+  React.useEffect(() => {
+    const id = setTimeout(() => {
+      ready.current = true;
+    });
+    return () => clearTimeout(id);
+  }, []);
+
   return (
     <aside
       {...props}
