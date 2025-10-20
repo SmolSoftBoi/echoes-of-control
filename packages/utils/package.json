@@ -15,7 +15,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
-    "jsdom": "^26.1.0",
+    "jsdom": "^27.0.1",
     "typescript": "^5",
     "vitest": "^3.2.4"
   },
