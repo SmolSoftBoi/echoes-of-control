@@ -684,70 +684,67 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.12.0.tgz#326a7b46f6d4cfa54ae25bb888551697873069b4"
   integrity sha512-5EwMtOqvJMMa3HbmxLlF74e+3/HhwBTMcvt3nqVJgGCozO6hzIPOBlwm8mGVNR9SN2IJpxSnlxczyDjcn7qIyw==
 
-"@supabase/functions-js@^2.1.5":
-  version "2.4.5"
-  resolved "https://registry.yarnpkg.com/@supabase/functions-js/-/functions-js-2.4.5.tgz#0a87d1a296bb32a1474c9322c932d9bbd4993d74"
-  integrity sha512-v5GSqb9zbosquTo6gBwIiq7W9eQ7rE5QazsK/ezNiQXdCbY+bH8D9qEaBIkhVvX4ZRW5rP03gEfw5yw9tiq4EQ==
+"@supabase/auth-js@2.76.1":
+  version "2.76.1"
+  resolved "https://registry.yarnpkg.com/@supabase/auth-js/-/auth-js-2.76.1.tgz#e496610ba737999724b2f21ddfeba8352d1c7756"
+  integrity sha512-bxmcgPuyjTUBg7+jAohJ15TDh3ph4hXcv7QkRsQgnIpszurD5LYaJPzX638ETQ8zDL4fvHZRHfGrcmHV8C91jA==
   dependencies:
-    "@supabase/node-fetch" "^2.6.14"
+    "@supabase/node-fetch" "2.6.15"
+    tslib "2.8.1"
 
-"@supabase/gotrue-js@^2.60.0":
-  version "2.71.1"
-  resolved "https://registry.yarnpkg.com/@supabase/gotrue-js/-/gotrue-js-2.71.1.tgz#66c3cc7ae7a94d05bd6c51aa438e953c160e0b09"
-  integrity sha512-tPylhe6OoK8nFiY0LFAb/EDL+Yznsaj8jT8pg7qqB115wlEvJssgSZ5mnRlR7XvYzjvN7ZLfRDsKAZhYGSjNXA==
+"@supabase/functions-js@2.76.1":
+  version "2.76.1"
+  resolved "https://registry.yarnpkg.com/@supabase/functions-js/-/functions-js-2.76.1.tgz#20e1d310f864453ff7b45a0a9d6d472236a6f1ca"
+  integrity sha512-+zJym/GC1sofm5QYKGxHSszCpMW4Ao2dj/WC3YlffAGuIlIhUtWTJvKsv5q7sWaSKUKdDhGpWhZ2OD++fW5BtQ==
   dependencies:
-    "@supabase/node-fetch" "^2.6.14"
+    "@supabase/node-fetch" "2.6.15"
+    tslib "2.8.1"
 
-"@supabase/node-fetch@^2.6.13":
-  version "2.6.13"
-  resolved "https://registry.yarnpkg.com/@supabase/node-fetch/-/node-fetch-2.6.13.tgz#0d36219a9e2134049a7317591e1d4fbf73a42ec4"
-  integrity sha512-rEHQaDVzxLZMCK3p+JW2nzEsK4AJpOQhetppaqAzrFum0Ub8wcnoM/8f1dWRZSulY5fRDP6rJaWT/8X3VleCzg==
-  dependencies:
-    whatwg-url "^5.0.0"
-
-"@supabase/node-fetch@^2.6.14":
+"@supabase/node-fetch@2.6.15":
   version "2.6.15"
   resolved "https://registry.yarnpkg.com/@supabase/node-fetch/-/node-fetch-2.6.15.tgz#731271430e276983191930816303c44159e7226c"
   integrity sha512-1ibVeYUacxWYi9i0cf5efil6adJ9WRyZBLivgjs+AUpewx1F3xPi7gLgaASI2SmIQxPoCEjAsLAzKPgMJVgOUQ==
   dependencies:
     whatwg-url "^5.0.0"
 
-"@supabase/postgrest-js@^1.9.0":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@supabase/postgrest-js/-/postgrest-js-1.21.1.tgz#eda94004b82acdc3ac681713ee985a432a502270"
-  integrity sha512-vy6LRvf4Yt5rub+cToevCYe6x4wVKzWS9mT5dRWfb0Ykx4K5GBUbg43LjdnXuI8/9x/TEzzY+pYoEv1+t0+ZEg==
+"@supabase/postgrest-js@2.76.1":
+  version "2.76.1"
+  resolved "https://registry.yarnpkg.com/@supabase/postgrest-js/-/postgrest-js-2.76.1.tgz#7d458c08d11b8f2c8e706717bd6064a3a60c430d"
+  integrity sha512-QJ1Cwim6L9gzWKP8U4Lgw9x/4lMWkZSVMDRYFCH+vVGitVbtfU885swTiioOjjUe4EYGZm+Xktg90twzSVv6IA==
   dependencies:
-    "@supabase/node-fetch" "^2.6.14"
+    "@supabase/node-fetch" "2.6.15"
+    tslib "2.8.1"
 
-"@supabase/realtime-js@^2.9.3":
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/@supabase/realtime-js/-/realtime-js-2.12.2.tgz#ce0ffd856677e25f78f366712dd0137b4c40c0bb"
-  integrity sha512-4M89QQ9Kv7tstAzw61FI8fbVWh0daSR4HvIpqBtYvNAQ+BkpsXwxj4chqT6WBO+I5yY/aAVtj1ll1049XkCYJA==
+"@supabase/realtime-js@2.76.1":
+  version "2.76.1"
+  resolved "https://registry.yarnpkg.com/@supabase/realtime-js/-/realtime-js-2.76.1.tgz#72907da0c9d3fb032afe0b21159aaeff3f21a0c5"
+  integrity sha512-B5Lfmprea2fx2FS7obp4uAWiRUlEa6j9J3+BvvETGp/2LdkSRBaLEJCBylfcZTXk67ajNPX6ppvKvAZsckqXYg==
   dependencies:
-    "@supabase/node-fetch" "^2.6.13"
+    "@supabase/node-fetch" "2.6.15"
     "@types/phoenix" "^1.6.6"
     "@types/ws" "^8.18.1"
-    isows "^1.0.7"
+    tslib "2.8.1"
     ws "^8.18.2"
 
-"@supabase/storage-js@^2.5.4":
-  version "2.10.4"
-  resolved "https://registry.yarnpkg.com/@supabase/storage-js/-/storage-js-2.10.4.tgz#b7188adef265df8ce52fc54d289c36de85dac936"
-  integrity sha512-cvL02GarJVFcNoWe36VBybQqTVRq6wQSOCvTS64C+eyuxOruFIm1utZAY0xi2qKtHJO3EjKaj8iWJKySusDmAQ==
+"@supabase/storage-js@2.76.1":
+  version "2.76.1"
+  resolved "https://registry.yarnpkg.com/@supabase/storage-js/-/storage-js-2.76.1.tgz#7f2f85e139696cd83e4f65db17229de8726350ca"
+  integrity sha512-OJiNT8tocI9tcTjTjv1SBVLabzgEnS1NorZuqivkiJ0gTYmeg2c2PFmqCARhoQ4whF6zR9MVsX/Mtj2oSv4i/w==
   dependencies:
-    "@supabase/node-fetch" "^2.6.14"
+    "@supabase/node-fetch" "2.6.15"
+    tslib "2.8.1"
 
-"@supabase/supabase-js@2.39.3":
-  version "2.39.3"
-  resolved "https://registry.yarnpkg.com/@supabase/supabase-js/-/supabase-js-2.39.3.tgz#dfdc60337182a0a7b45cafb256281b159b75e25c"
-  integrity sha512-NoltJSaJNKDJNutO5sJPAAi5RIWrn1z2XH+ig1+cHDojT6BTN7TvZPNa3Kq3gFQWfO5H1N9El/bCTZJ3iFW2kQ==
+"@supabase/supabase-js@2.76.1":
+  version "2.76.1"
+  resolved "https://registry.yarnpkg.com/@supabase/supabase-js/-/supabase-js-2.76.1.tgz#648b13e1be940c41d17956c66bcbdba2aa7c58c5"
+  integrity sha512-dYMh9EsTVXZ6WbQ0QmMGIhbXct5+x636tXXaaxUmwjj3kY1jyBTQU8QehxAIfjyRu1mWGV07hoYmTYakkxdSGQ==
   dependencies:
-    "@supabase/functions-js" "^2.1.5"
-    "@supabase/gotrue-js" "^2.60.0"
-    "@supabase/node-fetch" "^2.6.14"
-    "@supabase/postgrest-js" "^1.9.0"
-    "@supabase/realtime-js" "^2.9.3"
-    "@supabase/storage-js" "^2.5.4"
+    "@supabase/auth-js" "2.76.1"
+    "@supabase/functions-js" "2.76.1"
+    "@supabase/node-fetch" "2.6.15"
+    "@supabase/postgrest-js" "2.76.1"
+    "@supabase/realtime-js" "2.76.1"
+    "@supabase/storage-js" "2.76.1"
 
 "@swc/helpers@0.5.15":
   version "0.5.15"
@@ -2289,6 +2286,15 @@ formdata-node@^4.3.2:
     node-domexception "1.0.0"
     web-streams-polyfill "4.0.0-beta.3"
 
+framer-motion@^12.23.12:
+  version "12.23.24"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-12.23.24.tgz#4895b67e880bd2b1089e61fbaa32ae802fc24b8c"
+  integrity sha512-HMi5HRoRCTou+3fb3h9oTLyJGBxHfW+HnNE25tAXOvVx/IvwMHK0cx7IR4a2ZU6sh3IX1Z+4ts32PcYBOqka8w==
+  dependencies:
+    motion-dom "^12.23.23"
+    motion-utils "^12.23.6"
+    tslib "^2.4.0"
+
 fsevents@~2.3.2, fsevents@~2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.3.tgz#cac6407785d03675a2a5e1a5305c697b347d90d6"
@@ -2729,11 +2735,6 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-isows@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/isows/-/isows-1.0.7.tgz#1c06400b7eed216fbba3bcbd68f12490fc342915"
-  integrity sha512-I1fSfDCZL5P0v33sVqeTDSpcstAg/N+wF5HS033mogOVIp4B+oHC7oOCsA3axAbBSGTJ8QubbNmnIRN/h8U7hg==
-
 iterator.prototype@^1.1.4:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/iterator.prototype/-/iterator.prototype-1.1.5.tgz#12c959a29de32de0aa3bbbb801f4d777066dae39"
@@ -3037,6 +3038,18 @@ mkdirp@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-3.0.1.tgz#e44e4c5607fb279c168241713cc6e0fea9adcb50"
   integrity sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==
+
+motion-dom@^12.23.23:
+  version "12.23.23"
+  resolved "https://registry.yarnpkg.com/motion-dom/-/motion-dom-12.23.23.tgz#8f874333ea1a04ee3a89eb928f518b463d589e0e"
+  integrity sha512-n5yolOs0TQQBRUFImrRfs/+6X4p3Q4n1dUEqt/H58Vx7OW6RF+foWEgmTVDhIWJIMXOuNNL0apKH2S16en9eiA==
+  dependencies:
+    motion-utils "^12.23.6"
+
+motion-utils@^12.23.6:
+  version "12.23.6"
+  resolved "https://registry.yarnpkg.com/motion-utils/-/motion-utils-12.23.6.tgz#fafef80b4ea85122dd0d6c599a0c63d72881f312"
+  integrity sha512-eAWoPgr4eFEOFfg2WjIsMoqJTW6Z8MTUCgn/GZ3VRpClWBdnbjryiA3ZSNLyxCTmCQx4RmYX6jX1iWHbenUPNQ==
 
 ms@^2.0.0, ms@^2.1.1, ms@^2.1.3:
   version "2.1.3"
@@ -3894,7 +3907,7 @@ tsconfig-paths@^3.15.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@^2.4.0, tslib@^2.8.0:
+tslib@2.8.1, tslib@^2.4.0, tslib@^2.8.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
