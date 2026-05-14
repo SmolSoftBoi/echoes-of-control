@@ -20,7 +20,7 @@
     "vitest": "^4.0.16"
   },
   "dependencies": {
-    "@supabase/supabase-js": "2.39.3",
+    "@supabase/supabase-js": "2.89.0",
     "clsx": "^2",
     "tailwind-merge": "^3"
   }
