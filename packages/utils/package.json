@@ -16,7 +16,7 @@
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
     "jsdom": "^27.3.0",
-    "typescript": "^5",
+    "typescript": "^6",
     "vitest": "^4.0.16"
   },
   "dependencies": {
