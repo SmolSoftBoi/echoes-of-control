@@ -14,4 +14,12 @@ describe('ChoiceButton', () => {
     fireEvent.click(button);
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
+
+  it('marks selection via aria-pressed', () => {
+    const { getByRole } = render(
+      <ChoiceButton label="Pick" selected />,
+    );
+    const button = getByRole('button', { name: /pick/i });
+    expect(button).toHaveAttribute('aria-pressed', 'true');
+  });
 });
