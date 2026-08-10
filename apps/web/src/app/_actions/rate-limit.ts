@@ -28,7 +28,8 @@ export async function rateLimit(
   key: string,
   { windowMs = 60_000, limit = 5 }: RateLimitOptions = {},
 ): Promise<boolean> {
-  const safeWindowMs = Math.max(1, Math.min(windowMs, MAX_WINDOW_MS));
+  const clampedWindowMs = Math.min(windowMs, MAX_WINDOW_MS);
+  const safeWindowMs = clampedWindowMs > 0 ? clampedWindowMs : 1;
   const safeLimit = Math.max(1, limit);
   const now = Date.now();
   const entry = store.get(key) ?? { timestamps: [] };
